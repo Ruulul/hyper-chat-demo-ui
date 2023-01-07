@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
-const Chat = require('../peer.js')
+const Chat = require('hyper-chat-demo')
 var chat = undefined
 
 const createWindow = () => {
@@ -24,7 +24,7 @@ app.whenReady().then(async () => {
         return message => {
             const { type, data } = message
             const handle = {
-                message: handle_message, nick, 
+                message: handle_message, info: nick, update: nick, 
                 connection, disconnect, connections, 
             }
             handle[type]()
@@ -48,7 +48,7 @@ app.whenReady().then(async () => {
     ipcMain.handle('join-topic', join_topic)
     ipcMain.handle('send-message', send_message)
     ipcMain.on('exit', exit)
-    ipcMain.on('change-nick', (_, data) => chat({type: 'change-nick', data}))
+    ipcMain.on('change-nick', (_, data) => chat({type: 'update', data}))
     ipcMain.on('connections', () => chat({type: 'connections'}))
 
     app.on('activate', () => {

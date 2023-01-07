@@ -15,5 +15,8 @@
   "devDependencies": {
     "electron": "^22.0.0",
     "hyperswarm": "^4.3.5"
+  },
+  "dependencies": {
+    "hyper-chat-demo": "^0.2.0"
   }
 }
